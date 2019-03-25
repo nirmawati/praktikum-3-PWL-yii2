@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\EntryForm;
 
 /**
  * Site controller
@@ -86,6 +87,17 @@ class SiteController extends Controller
         return $this->render('mahasiswa');
     }
 
+    public function actionEntry()
+    {
+        $model = new EntryForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            return $this->render('entry-confirm', ['model' => $model]);
+        } else {
+            return $this->render('entry', ['model' => $model]);
+        }
+    }
+
     /**
      * Logs in a user.
      *
@@ -153,6 +165,19 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+
+    public function actionSalam()
+    {
+        $ucapan = "Assalamu'alaikum";
+        $nama = "Nirma";
+
+        return $this->render('salam', [
+            'ucapanSalam' => $ucapan,
+            'seseorang' => $nama
+        ]);
+    }
+
 
     /**
      * Signs user up.
